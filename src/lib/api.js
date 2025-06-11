@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 // Create the axios instance
 const api = axios.create({
     baseURL: import.meta.env.PROD
-        ? "https://twitter-clone-backend-f6w8.onrender.com"
+        ? "https://twitter-clone-backend-f6w8.onrender.com/api"
         : "/api", // for local dev (proxied by Vite)
     withCredentials: true,
 });
