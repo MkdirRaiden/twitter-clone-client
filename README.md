@@ -20,14 +20,6 @@
 - 📱 **Responsive Design** – Mobile-friendly and adaptive UI
 - 🌙 **Dark Mode Compatible** (via DaisyUI)
 
----
-
-## 📸 Screenshots
-
-> (Add your screenshots or Loom video demo link here.)
-
----
-
 ## 🛠️ Tech Stack
 
 | Tech                | Description                             |
@@ -140,14 +132,14 @@ frontend/
 
 ## 📇 Contact
 
-**Author:** [Muktadir Ahmed]  
-**Email:** [1996raiden27@gmail.com]  
-**LinkedIn:** [https://linkedin.com/in/yourprofile](www.linkedin.com/in/muktadir-ahmed-arsalan)  
-**Portfolio:** [https://your-portfolio.com](https://portfolio-f53034xru-ahmeds-projects-15889820.vercel.app/)
+**Author:** Muktadir Ahmed  
+**Email:** 1996raiden27@gmail.com
+**LinkedIn:** [https://portfolio-f53034xru-ahmeds-projects-15889820.vercel.app/](www.linkedin.com/in/muktadir-ahmed-arsalan)  
+**Portfolio:** [https://portfolio-f53034xru-ahmeds-projects-15889820.vercel.app/](https://portfolio-f53034xru-ahmeds-projects-15889820.vercel.app/)
 
 ---
 
 ## 📃 License
 
 MIT License  
-© 2025 [Ahmed]
+© 2025 Ahmed
