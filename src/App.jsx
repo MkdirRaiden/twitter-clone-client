@@ -1,0 +1,54 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import HomePage from "@/pages/home/HomePage";
+import SignUpPage from "@/pages/auth/signup/SignUpPage";
+import LoginPage from "@/pages/auth/login/LoginPage";
+import ProfilePage from "@/pages/profile/ProfilePage";
+import NotificationPage from "@/pages/notification/NotificationPage";
+import FollowingPage from "@/pages/following/FollowingPage";
+import PageNotFound from "@/pages/PageNotFound";
+import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
+import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
+import { useAuth } from "@/hooks/useAuth.js";
+
+function App() {
+  const { authUser } = useAuth();
+
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            authUser ? (
+              <AuthenticatedLayout user={authUser} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        >
+          <Route index element={<HomePage />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route path="/following" element={<FollowingPage />} />
+          <Route path="/notifications" element={<NotificationPage />} />
+          <Route path="/all-suggested-users" element={<AllSuggestedUsers />} />
+        </Route>
+
+        <Route
+          path="/login"
+          element={authUser ? <Navigate to="/" /> : <LoginPage />}
+        />
+        <Route
+          path="/signup"
+          element={authUser ? <Navigate to="/" /> : <SignUpPage />}
+        />
+
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+
+      <Toaster />
+    </>
+  );
+}
+
+export default App;
