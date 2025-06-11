@@ -10,9 +10,18 @@ import PageNotFound from "@/pages/PageNotFound";
 import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
 import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
 import { useAuth } from "@/hooks/useAuth.js";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 function App() {
-  const { authUser } = useAuth();
+  const { authUser, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center text-xl text-white">
+        <LoadingSpinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <>
