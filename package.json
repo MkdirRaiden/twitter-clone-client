@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "postbuild": "cp dist/index.html dist/404.html"
+    "postbuild": "cpx dist/index.html dist/404.html"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",
@@ -33,6 +33,7 @@
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.21",
+    "cpx": "^1.5.0",
     "daisyui": "^5.0.42",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
