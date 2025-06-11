@@ -55,8 +55,8 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/x-clone.git
-cd x-clone/frontend
+git clone https://github.com/MkdirRaiden/twitter-clone-client.git
+cd twitter-clone-client
 ```
 
 ### 2. Install Dependencies
@@ -94,7 +94,7 @@ Your frontend is configured to proxy `/api` requests to the backend:
 // vite.config.js
 server: {
   proxy: {
-    '/api': 'http://localhost:5000'
+    '/api': 'https://twitter-clone-backend-f6w8.onrender.com'
   }
 }
 ```
@@ -108,7 +108,7 @@ Make sure your backend routes are prefixed with `/api`.
 ```
 frontend/
 ├── src/
-│   ├── api/               # Axios instance and helpers
+│   ├── lib/api/               # Axios instance and helpers
 │   ├── components/        # Shared and page-specific components
 │   ├── hooks/             # Custom hooks (auth, queries, etc.)
 │   ├── pages/             # Top-level route components
@@ -140,14 +140,14 @@ frontend/
 
 ## 📇 Contact
 
-**Author:** [Your Full Name]  
-**Email:** [you@example.com]  
-**LinkedIn:** [https://linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
-**Portfolio:** [https://your-portfolio.com](https://your-portfolio.com)
+**Author:** [Muktadir Ahmed]  
+**Email:** [1996raiden27@gmail.com]  
+**LinkedIn:** [https://linkedin.com/in/yourprofile](www.linkedin.com/in/muktadir-ahmed-arsalan)  
+**Portfolio:** [https://your-portfolio.com](https://portfolio-f53034xru-ahmeds-projects-15889820.vercel.app/)
 
 ---
 
 ## 📃 License
 
 MIT License  
-© 2025 [Your Name]
+© 2025 [Ahmed]
