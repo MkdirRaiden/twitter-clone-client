@@ -9,19 +9,21 @@ import FollowingPage from "@/pages/following/FollowingPage";
 import PageNotFound from "@/pages/PageNotFound";
 import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
 import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
-import { useAuth } from "@/hooks/useAuth.js";
-import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 function App() {
-  const { authUser, isLoading } = useAuth();
+  const [authUser, setAuthUser] = useState(null);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="h-screen flex items-center justify-center text-xl text-white">
-  //       <LoadingSpinner size="lg" />
-  //     </div>
-  //   );
-  // }
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await get("/auth/me", { suppressToast: true });
+        setAuthUser(res.user);
+      } catch {
+        setAuthUser(null);
+      }
+    };
+    checkSession();
+  }, []);
 
   return (
     <>
