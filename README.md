@@ -126,7 +126,7 @@ frontend/
 
 ## 🌍 Live Demo
 
-(https://twitter-clone-client-gray.vercel.app/)
+https://twitter-clone-client-gray.vercel.app/
 
 ---
 
