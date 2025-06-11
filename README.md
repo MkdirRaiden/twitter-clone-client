@@ -126,7 +126,7 @@ frontend/
 
 ## 🌍 Live Demo
 
-> _Add your deployed link here (e.g., Netlify, Vercel, GitHub Pages)_
+(https://twitter-clone-client-gray.vercel.app/)
 
 ---
 
