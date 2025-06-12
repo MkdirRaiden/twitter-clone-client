@@ -10,13 +10,14 @@ import FollowingPage from "@/pages/following/FollowingPage";
 import PageNotFound from "@/pages/PageNotFound";
 import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
 import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
+import { get } from "@/lib/api";
 
 function App() {
   const { data: authUser, isLoading } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
       const res = await get("/auth/me", { suppressToast: true });
-      return res.user;
+      return res?.user;
     },
     staleTime: 1000 * 60 * 5,
     retry: false,

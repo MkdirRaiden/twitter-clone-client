@@ -1,41 +1,46 @@
+// api.js
 import axios from "axios";
 import toast from "react-hot-toast";
+import { queryClient } from "@/main";
 
-// Create the axios instance
+// Axios instance
 const api = axios.create({
     baseURL: import.meta.env.PROD
         ? "https://twitter-clone-backend-f6w8.onrender.com/api"
-        : "/api", // for local dev (proxied by Vite)
+        : "/api",
     withCredentials: true,
 });
 
-// Standard response handler
+// Check if user is authenticated
+const isLoggedIn = () => !!queryClient.getQueryData(["authUser"]);
+
 const handleResponse = (res) => {
     const payload = res?.data?.data;
-
     if (!payload || payload.status !== true) {
         throw new Error("Unexpected response format or failure");
     }
-
     if (payload.message) toast.success(payload.message);
     return payload;
 };
 
-//  Updated: Support toast suppression
 const handleError = (error, suppressToast = false) => {
+    const statusCode = error?.response?.status;
     const msg =
-        error?.response?.data?.data?.message || // your backend's message
-        error?.response?.data?.message ||       // fallback
+        error?.response?.data?.data?.message ||
+        error?.response?.data?.message ||
         error?.message ||
         "Something went wrong!";
 
-    if (!suppressToast) toast.error(msg);
+    const isUnauthorized = statusCode === 401;
+    if (!suppressToast && !isUnauthorized) {
+        toast.error(msg);
+    }
+
     throw new Error(msg);
 };
 
-//  Updated: Accept options for suppressToast
-
 export const get = async (url, options = {}) => {
+    if (!isLoggedIn()) return null;
     try {
         const res = await api.get(url);
         return handleResponse(res);
@@ -45,6 +50,7 @@ export const get = async (url, options = {}) => {
 };
 
 export const post = async (url, data = {}, options = {}) => {
+    if (!isLoggedIn() && !url.includes("/auth")) return null;
     try {
         const res = await api.post(url, data);
         return handleResponse(res);
@@ -54,6 +60,7 @@ export const post = async (url, data = {}, options = {}) => {
 };
 
 export const patch = async (url, data = {}, options = {}) => {
+    if (!isLoggedIn()) return null;
     try {
         const res = await api.patch(url, data);
         return handleResponse(res);
@@ -63,6 +70,7 @@ export const patch = async (url, data = {}, options = {}) => {
 };
 
 export const put = async (url, data = {}, options = {}) => {
+    if (!isLoggedIn()) return null;
     try {
         const res = await api.put(url, data);
         return handleResponse(res);
@@ -72,6 +80,7 @@ export const put = async (url, data = {}, options = {}) => {
 };
 
 export const del = async (url, data = null, options = {}) => {
+    if (!isLoggedIn()) return null;
     try {
         const res = data
             ? await api.delete(url, { data })

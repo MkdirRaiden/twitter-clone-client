@@ -1,3 +1,4 @@
+// main.jsx
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -11,8 +12,8 @@ const getInitialAuthUser = () => {
   return stored ? JSON.parse(stored) : null;
 };
 
-// Create QueryClient instance
-const queryClient = new QueryClient({
+//  Shared query client
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -20,7 +21,7 @@ const queryClient = new QueryClient({
   },
 });
 
-//  Manually populate the cache after creating the client
+// Preload authUser into React Query cache
 const initialUser = getInitialAuthUser();
 if (initialUser) {
   queryClient.setQueryData(["authUser"], initialUser);
