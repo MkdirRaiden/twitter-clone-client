@@ -1,6 +1,6 @@
 // api.js
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { queryClient } from "@/main";
 
 // Axios instance

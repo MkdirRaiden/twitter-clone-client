@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import HomePage from "@/pages/home/HomePage";
 import SignUpPage from "@/pages/auth/signup/SignUpPage";
 import LoginPage from "@/pages/auth/login/LoginPage";
@@ -11,6 +10,8 @@ import PageNotFound from "@/pages/PageNotFound";
 import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
 import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
 import { get } from "@/lib/api";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { data: authUser, isLoading } = useQuery({
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route
           path="/"
@@ -54,8 +56,6 @@ function App() {
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-
-      <Toaster />
     </>
   );
 }

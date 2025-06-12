@@ -7,6 +7,7 @@ import { FaRetweet, FaRegHeart, FaHeart } from "react-icons/fa";
 import { BsBookmarkPlus, BsBookmarkCheckFill } from "react-icons/bs";
 import { useAuth } from "@/hooks/useAuth.js";
 import moment from "moment";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 const Post = ({ post, username, feedType }) => {
   const { authUser } = useAuth();
@@ -115,7 +116,7 @@ const Post = ({ post, username, feedType }) => {
           className="flex gap-1 items-center cursor-pointer"
         >
           {isLiked ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
-          {post?.likes?.length ?? 0}
+          {!isLiking ? post?.likes?.length ?? 0 : <LoadingSpinner />}
         </button>
 
         <label
