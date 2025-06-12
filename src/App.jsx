@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import HomePage from "@/pages/home/HomePage";
@@ -12,19 +12,15 @@ import AuthenticatedLayout from "@/components/layout/AuthenticatedLayout";
 import AllSuggestedUsers from "@/pages/suggested/AllSuggestedUsers";
 
 function App() {
-  const [authUser, setAuthUser] = useState(null);
-
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const res = await get("/auth/me", { suppressToast: true });
-        setAuthUser(res.user);
-      } catch {
-        setAuthUser(null);
-      }
-    };
-    checkSession();
-  }, []);
+  const { data: authUser, isLoading } = useQuery({
+    queryKey: ["authUser"],
+    queryFn: async () => {
+      const res = await get("/auth/me", { suppressToast: true });
+      return res.user;
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: false,
+  });
 
   return (
     <>
