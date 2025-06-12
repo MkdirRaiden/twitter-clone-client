@@ -12,7 +12,7 @@ const getInitialAuthUser = () => {
   return stored ? JSON.parse(stored) : null;
 };
 
-//  Shared query client
+//  Shared query client/global
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
