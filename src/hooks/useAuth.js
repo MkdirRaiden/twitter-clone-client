@@ -30,11 +30,9 @@ export const useAuth = () => {
     const logout = async () => {
         await post("/auth/logout");
         localStorage.removeItem("authUser");
-        // Remove only relevant queries
-        queryClient.removeQueries(["authUser"]);
+        // Set user to null first to trigger rerenders
         queryClient.setQueryData(["authUser"], null);
-
-        // Navigate after cleanup
+        //  Now navigate
         navigate("/login");
     };
 

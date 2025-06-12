@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import XSvg from "@/components/svgs/X";
-import {
-  MdOutlineMail,
-  MdPassword,
-  MdOutlineArrowForward,
-} from "react-icons/md";
+import { MdPassword, MdOutlineArrowForward } from "react-icons/md";
 import { IoIosSend } from "react-icons/io";
 import { useAuth } from "@/hooks/useAuth.js";
+import { FaUser } from "react-icons/fa";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -56,7 +53,7 @@ const LoginPage = () => {
             </h1>
 
             <label className="input input-bordered rounded-sm flex items-center gap-2">
-              <MdOutlineMail />
+              <FaUser />
               <input
                 type="text"
                 className="grow"
