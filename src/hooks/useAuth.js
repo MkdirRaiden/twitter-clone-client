@@ -1,17 +1,15 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { get, post } from "@/lib/api.js";
-import { toast } from "react-hot-toast";
 
 const fetchAuthUser = async () => {
-    const res = await get("/auth/me"); // safe now due to guard
+    const res = await get("/auth/me", { suppressToast: true }); // guarded globally
     return res?.user;
 };
 
 export const useAuth = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const { data: authUser, isLoading, isError } = useQuery({
         queryKey: ["authUser"],
@@ -25,7 +23,6 @@ export const useAuth = () => {
         if (user) {
             localStorage.setItem("authUser", JSON.stringify(user));
             queryClient.setQueryData(["authUser"], user);
-            toast.success("Logged in successfully");
             navigate("/");
         }
     };
@@ -33,9 +30,8 @@ export const useAuth = () => {
     const logout = async () => {
         await post("/auth/logout");
         localStorage.removeItem("authUser");
-        queryClient.clear();
+        queryClient.clear(); // fully reset cache
         queryClient.setQueryData(["authUser"], null);
-        toast.success("Logout successful");
         navigate("/login");
     };
 
