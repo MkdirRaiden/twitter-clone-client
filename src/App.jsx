@@ -18,7 +18,7 @@ function App() {
     queryKey: ["authUser"],
     queryFn: async () => {
       const res = await get("/auth/me", { suppressToast: true });
-      return res?.user;
+      return res?.user ?? null;
     },
     staleTime: 1000 * 60 * 5,
     retry: false,

@@ -2,7 +2,7 @@ import { MdEdit } from "react-icons/md";
 import { FaLink } from "react-icons/fa";
 import moment from "moment";
 import { useRef, useState } from "react";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import ProfileHeaderSkeleton from "@/components/skeletons/ProfileHeaderSkeleton";
 import FollowButton from "@/components/common/FollowButton";

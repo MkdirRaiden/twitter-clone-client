@@ -4,7 +4,7 @@ import { get, post } from "@/lib/api.js";
 
 const fetchAuthUser = async () => {
     const res = await get("/auth/me", { suppressToast: true }); // guarded globally
-    return res?.user;
+    return res?.user ?? null;
 };
 
 export const useAuth = () => {
