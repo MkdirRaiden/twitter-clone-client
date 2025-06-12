@@ -4,9 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useGetData } from "@/hooks/customHooks.js";
 import SidebarLinkData from "@/utils/sidebar/LinksData";
 import Search from "@/components/common/Search";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { useAuth } from "@/hooks/useAuth.js";
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [isPending, setIsPending] = useState(false);
   const { pathname } = useLocation();
   const { authUser, logout } = useAuth();
 
@@ -16,6 +19,12 @@ const Sidebar = () => {
   });
 
   if (!authUser) return null;
+
+  const logoutUser = async () => {
+    setIsPending(true);
+    await logout();
+    setIsPending(false);
+  };
 
   return (
     <div className="sticky top-0 left-0 h-screen flex flex-col border-r-2 border-gray-700 w-20 md:w-full">
@@ -78,13 +87,19 @@ const Sidebar = () => {
       </ul>
 
       <button
+        disabled={isPending}
         className="mt-auto mb-5 sidebar-link"
         onClick={(e) => {
           e.preventDefault();
-          logout();
+          logoutUser();
         }}
       >
-        <AiOutlineLogout className="w-7 h-7 cursor-pointer" />
+        {isPending ? (
+          <LoadingSpinner />
+        ) : (
+          <AiOutlineLogout className="w-7 h-7 cursor-pointer" />
+        )}
+
         <div className="text-lg hidden md:block">Logout</div>
       </button>
     </div>

@@ -32,6 +32,7 @@ const handleError = (error, suppressToast = false) => {
         "Something went wrong!";
 
     const isUnauthorized = statusCode === 401;
+
     if (!suppressToast && !isUnauthorized) {
         toast.error(msg);
     }
