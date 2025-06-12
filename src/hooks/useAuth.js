@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { get, post } from "@/lib/api.js";
 
 const fetchAuthUser = async () => {
-    const res = await get("/auth/me");
+    const res = await get("/auth/me", { suppressToast: true });
     return res.user; // backend should return { status: true, user: {...} }
 };
 

@@ -21,7 +21,7 @@ const handleResponse = (res) => {
     return payload;
 };
 
-// 🔧 Updated: Support toast suppression
+//  Updated: Support toast suppression
 const handleError = (error, suppressToast = false) => {
     const msg =
         error?.response?.data?.data?.message || // your backend's message
@@ -33,7 +33,7 @@ const handleError = (error, suppressToast = false) => {
     throw new Error(msg);
 };
 
-// 🔧 Updated: Accept options for suppressToast
+//  Updated: Accept options for suppressToast
 
 export const get = async (url, options = {}) => {
     try {
