@@ -124,6 +124,11 @@ frontend/
 
 ---
 
+## 🔗 Backend
+
+The backend of this app is available at:  
+👉 [twitter-clone-backend Repo](https://github.com/MkdirRaiden/twitter-clone-backend.git)
+
 ## 🌍 Live Demo
 
 https://twitter-clone-client-gray.vercel.app/
