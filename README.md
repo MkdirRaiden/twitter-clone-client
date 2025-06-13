@@ -135,6 +135,10 @@ https://twitter-clone-client-gray.vercel.app/
 
 ---
 
+## 📸 Homepage Screenshot
+
+![Twitter Homepage](./public/homepage-screenshot.png)
+
 ## 📇 Contact
 
 **Author:** Muktadir Ahmed  
