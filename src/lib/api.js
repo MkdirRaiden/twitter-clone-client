@@ -32,6 +32,7 @@ const handleError = (error, suppressToast = false) => {
     // Auto-logout for 401s (unauthorized)
     if (statusCode === 401 || statusCode === 403) {
         queryClient.setQueryData(["authUser"], null);
+        localStorage.removeItem("authUser");
     }
 
     if (!suppressToast && statusCode !== 401) {
@@ -94,3 +95,4 @@ export const del = async (url, data = null, options = {}) => {
 };
 
 export default api;
+
