@@ -1,19 +1,16 @@
-// api.js
 import axios from "axios";
 import { toast } from "react-toastify";
 import { queryClient } from "@/main";
 
-// Axios instance
+// Axios instance — baseURL and cookie setup
 const api = axios.create({
     baseURL: import.meta.env.PROD
         ? "https://twitter-clone-backend-f6w8.onrender.com/api"
-        : "/api",
-    withCredentials: true,
+        : "http://localhost:8000/api", // or whatever your backend dev port is
+    withCredentials: true, // sends cookies (JWT) on every request
 });
 
-// Check if user is authenticated
-const isLoggedIn = () => !!queryClient.getQueryData(["authUser"]);
-
+// Handle success responses
 const handleResponse = (res) => {
     const payload = res?.data?.data;
     if (!payload || payload.status !== true) {
@@ -23,6 +20,7 @@ const handleResponse = (res) => {
     return payload;
 };
 
+// Handle API errors globally
 const handleError = (error, suppressToast = false) => {
     const statusCode = error?.response?.status;
     const msg =
@@ -31,17 +29,20 @@ const handleError = (error, suppressToast = false) => {
         error?.message ||
         "Something went wrong!";
 
-    const isUnauthorized = statusCode === 401;
+    // Auto-logout for 401s (unauthorized)
+    if (statusCode === 401 || statusCode === 403) {
+        queryClient.setQueryData(["authUser"], null);
+    }
 
-    if (!suppressToast && !isUnauthorized) {
+    if (!suppressToast && statusCode !== 401) {
         toast.error(msg);
     }
 
     throw new Error(msg);
 };
 
+// GET
 export const get = async (url, options = {}) => {
-    if (!isLoggedIn()) return null;
     try {
         const res = await api.get(url);
         return handleResponse(res);
@@ -50,8 +51,8 @@ export const get = async (url, options = {}) => {
     }
 };
 
+// POST
 export const post = async (url, data = {}, options = {}) => {
-    if (!isLoggedIn() && !url.includes("/auth")) return null;
     try {
         const res = await api.post(url, data);
         return handleResponse(res);
@@ -60,8 +61,8 @@ export const post = async (url, data = {}, options = {}) => {
     }
 };
 
+// PATCH
 export const patch = async (url, data = {}, options = {}) => {
-    if (!isLoggedIn()) return null;
     try {
         const res = await api.patch(url, data);
         return handleResponse(res);
@@ -70,8 +71,8 @@ export const patch = async (url, data = {}, options = {}) => {
     }
 };
 
+// PUT
 export const put = async (url, data = {}, options = {}) => {
-    if (!isLoggedIn()) return null;
     try {
         const res = await api.put(url, data);
         return handleResponse(res);
@@ -80,8 +81,8 @@ export const put = async (url, data = {}, options = {}) => {
     }
 };
 
+// DELETE
 export const del = async (url, data = null, options = {}) => {
-    if (!isLoggedIn()) return null;
     try {
         const res = data
             ? await api.delete(url, { data })
