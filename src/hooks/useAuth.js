@@ -21,7 +21,7 @@ export const useAuth = () => {
     const login = async (credentials, endpoint = "/auth/login") => {
         const { user } = await post(endpoint, credentials);
         if (user) {
-            localStorage.setItem("authUser", JSON.stringify(user));
+            // localStorage.setItem("authUser", JSON.stringify(user));
             queryClient.setQueryData(["authUser"], user);
             navigate("/");
         }
@@ -29,7 +29,7 @@ export const useAuth = () => {
 
     const logout = async () => {
         await post("/auth/logout");
-        localStorage.removeItem("authUser");
+        // localStorage.removeItem("authUser");
         // Set user to null first to trigger rerenders
         queryClient.setQueryData(["authUser"], null);
         //  Now navigate
@@ -45,3 +45,4 @@ export const useAuth = () => {
         logout,
     };
 };
+
